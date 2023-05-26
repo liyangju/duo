@@ -2,12 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const app = express();
-
-// Serve the index.html file in the "page" directory
+app.use('/duo', express.static(path.join(__dirname, 'duo')));
 app.use('/page', express.static(path.join(__dirname, 'page')));
 
-// Serve the xm.json file in the "line" directory
-app.use('/y', express.static(path.join(__dirname, 'line')));
 
 
 const blackList = ['35.190.191.', '34.149.204.188', '129.146.231.214', '18.212.151.96', '76.76.21.21'];
@@ -25,7 +22,7 @@ app.get('/', async (req, res) => {
 
   if (userAgent === 'okhttp/3.15' || userAgent === 'okhttp/5.0.0-alpha.10' || userAgent === 'okhttp/3.12.10' || userAgent === 'http/3.12.11' || userAgent === 'okhttp/3.12.13' || userAgent === 'okhttp/4.10.0' || userAgent === 'okhttp/4.11.0') {
     try {
-      const { data } = await axios.get('https://duo-lige.vercel.app/y/xm.json');
+      const { data } = await axios.get('https://duo-lige.vercel.app/duo/xm.json');
       res.send(data);
     } catch (error) {
       console.error(error);
@@ -36,6 +33,4 @@ app.get('/', async (req, res) => {
   }
 });
 
-app.listen(80, () => {
-  console.log(`Server listening at http://127.0.0.1`);
-});
+app.listen(80);

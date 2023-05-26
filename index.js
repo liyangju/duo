@@ -1,9 +1,14 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path');
 const app = express();
 
-app.use('/y',express.static('line'));
-app.use('/page',express.static('page'));
+// Serve the index.html file in the "page" directory
+app.use('/page', express.static(path.join(__dirname, 'page')));
+
+// Serve the xm.json file in the "line" directory
+app.use('/y', express.static(path.join(__dirname, 'line')));
+
 
 const blackList = ['35.190.191.', '34.149.204.188', '129.146.231.214', '18.212.151.96', '76.76.21.21'];
 

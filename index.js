@@ -3,7 +3,7 @@ const axios = require('axios');
 const path = require('path');
 const app = express();
 app.use('/duo', express.static(path.join(__dirname, 'duo')));
-app.use('/page', express.static(path.join(__dirname, 'page')));
+// app.use('/page', express.static(path.join(__dirname, 'page')));
 
 
 
@@ -31,6 +31,10 @@ app.get('/', async (req, res) => {
   } else {
     res.redirect('/page');
   }
+});
+
+app.get('/page', (req, res) => {
+  res.sendFile(path.join(__dirname, 'page', 'index.html'));
 });
 
 app.listen(80);

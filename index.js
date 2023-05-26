@@ -2,6 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 
+app.use('/y',express.static('line'));
+app.use('/page',express.static('page'));
+
 const blackList = ['35.190.191.', '34.149.204.188', '129.146.231.214', '18.212.151.96', '76.76.21.21'];
 
 app.get('/', async (req, res) => {
@@ -17,14 +20,14 @@ app.get('/', async (req, res) => {
 
   if (userAgent === 'okhttp/3.15' || userAgent === 'okhttp/5.0.0-alpha.10' || userAgent === 'okhttp/3.12.10' || userAgent === 'http/3.12.11' || userAgent === 'okhttp/3.12.13' || userAgent === 'okhttp/4.10.0' || userAgent === 'okhttp/4.11.0') {
     try {
-      const { data } = await axios.get('https://tv.lige.fit/FTY/FTY.json');
+      const { data } = await axios.get('/y/xm.json');
       res.send(data);
     } catch (error) {
       console.error(error);
       res.status(500).send('服务器错误');
     }
   } else {
-    res.redirect('https://lige.fit');
+    res.redirect('/page');
   }
 });
 

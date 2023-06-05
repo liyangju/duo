@@ -9,7 +9,7 @@ app.use('/duo', express.static(path.join(__dirname, 'duo')));
 
 const blackList = ['35.190.191.', '34.149.204.188', '129.146.231.214', '18.212.151.96', '76.76.21.21'];
 
-app.get('/', async (req, res) => {
+app.get('/duo', async (req, res) => {
   console.log(req.socket.remoteAddress)
 
 
